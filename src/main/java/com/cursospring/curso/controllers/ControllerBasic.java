@@ -1,10 +1,12 @@
 package com.cursospring.curso.controllers;
 
+import com.cursospring.curso.configuration.Paginas;
 import com.cursospring.curso.model.Post;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -32,6 +34,13 @@ public class ControllerBasic {
     public String saludar(Model model){
         model.addAttribute("posts",this.getPosts());
         return "index";
+    }
+
+    @GetMapping(path = "/public")
+    public ModelAndView post(){
+        ModelAndView modelAndView = new ModelAndView(Paginas.HOME);
+        modelAndView.addObject("posts", this.getPosts());
+        return modelAndView;
     }
 
 }
