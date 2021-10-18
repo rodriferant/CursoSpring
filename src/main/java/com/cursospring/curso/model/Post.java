@@ -5,8 +5,8 @@ import java.util.Date;
 public class Post {
     private int id;
     private String descripcion;
-    private String urlImg;
-    private Date fecha;
+    private String urlImg = "http://localhost:8080/img/post.jpg";
+    private Date fecha = new Date();
     private String titulo;
 
     public int getId() {

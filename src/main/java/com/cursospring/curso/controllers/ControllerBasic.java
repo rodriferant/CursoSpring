@@ -2,12 +2,10 @@ package com.cursospring.curso.controllers;
 
 import com.cursospring.curso.configuration.Paginas;
 import com.cursospring.curso.model.Post;
+import javafx.geometry.Pos;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.ArrayList;
@@ -59,5 +57,17 @@ public class ControllerBasic {
         //@RequestParam (defaultValue = "1", name = "id", required = false)
     }
 
+    @GetMapping("/postNew")
+    public ModelAndView getForm(){
+        return new ModelAndView("form").addObject("post",new Post());
+    }
+
+    @PostMapping("/addNewPost")
+    public String addNewPost(Post post, Model model){
+        List<Post> posts = this.getPosts();
+        posts.add(post);
+        model.addAttribute("posts", posts);
+        return "index";
+    }
 
 }
