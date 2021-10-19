@@ -1,5 +1,8 @@
 com\cursospring\curso\CursoSpringApplication.class
 com\cursospring\curso\components\PostComponent.class
 com\cursospring\curso\configuration\Paginas.class
+com\cursospring\curso\services\impl\PostServiceImpl.class
+com\cursospring\curso\services\impl\PostServiceImplDos.class
+com\cursospring\curso\services\PostService.class
 com\cursospring\curso\controllers\ControllerBasic.class
 com\cursospring\curso\model\Post.class
