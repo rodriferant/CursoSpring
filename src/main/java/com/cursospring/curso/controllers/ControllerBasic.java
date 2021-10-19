@@ -1,15 +1,14 @@
 package com.cursospring.curso.controllers;
 
+import com.cursospring.curso.components.PostComponent;
 import com.cursospring.curso.configuration.Paginas;
 import com.cursospring.curso.model.Post;
-import javafx.geometry.Pos;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -17,7 +16,7 @@ import java.util.stream.Collectors;
 @RequestMapping("/home")
 public class ControllerBasic {
 
-
+    /*
     public List<Post> getPosts(){
         ArrayList<Post> post = new ArrayList<>();
         post.add(new Post(1, "Los Mandalorianos eran un grupo cultural humano que se originó en el planeta Mandalore.", "http://localhost:8080/img/post.jpg", new Date(), "Mandalorian"));
@@ -29,18 +28,21 @@ public class ControllerBasic {
 
         return post;
     }
+    */
+    @Autowired
+    private PostComponent _postComponent;
 
 
     @GetMapping (path = {"/posts","/"})
     public String saludar(Model model){
-        model.addAttribute("posts",this.getPosts());
+        model.addAttribute("posts",this._postComponent.getPosts());
         return "index";
     }
 
     @GetMapping(path = "/public")
     public ModelAndView post(){
         ModelAndView modelAndView = new ModelAndView(Paginas.HOME);
-        modelAndView.addObject("posts", this.getPosts());
+        modelAndView.addObject("posts", this._postComponent.getPosts());
         return modelAndView;
     }
 
@@ -50,7 +52,7 @@ public class ControllerBasic {
             ){
         ModelAndView modelAndView = new ModelAndView(Paginas.POST);
          //para filtrar el post
-        List<Post> postFiltrado = this.getPosts().stream().filter((p)-> {return p.getId() == id;}).collect(Collectors.toList());
+        List<Post> postFiltrado = this._postComponent.getPosts().stream().filter((p)-> {return p.getId() == id;}).collect(Collectors.toList());
         modelAndView.addObject("post", postFiltrado.get(0));
         return modelAndView;
         //estaba arriba donde Path
@@ -64,7 +66,7 @@ public class ControllerBasic {
 
     @PostMapping("/addNewPost")
     public String addNewPost(Post post, Model model){
-        List<Post> posts = this.getPosts();
+        List<Post> posts = this._postComponent.getPosts();
         posts.add(post);
         model.addAttribute("posts", posts);
         return "index";
