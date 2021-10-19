@@ -1,3 +1,4 @@
+com\cursospring\curso\services\impl\PostServiceDecoradoImp.class
 com\cursospring\curso\CursoSpringApplication.class
 com\cursospring\curso\components\PostComponent.class
 com\cursospring\curso\configuration\Paginas.class

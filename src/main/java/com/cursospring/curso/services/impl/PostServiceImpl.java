@@ -9,7 +9,7 @@ import java.util.List;
 public class PostServiceImpl implements PostService {
 
     @Override
-    public List<Post> validationId(List<Post> posts) {
+    public List<Post> validation(List<Post> posts) {
         System.out.println("Primer servicio");
         for (Post post : posts){
             if(post.getTitulo()==null){
