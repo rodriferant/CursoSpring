@@ -15,9 +15,19 @@ public class CursoSpringApplication implements CommandLineRunner {
     @Qualifier("com.cursospring.curso.components.PostComponent")
     public PostComponent postComponent;
 
-    @Autowired
-    @Qualifier("serviceDecorado")
+    //@Autowired //ayuda a inyectar
+    //@Qualifier("serviceDecorado")
     public PostService postService;
+
+    public PostService getPostService() {
+        return postService;
+    }
+
+    @Autowired //ayuda a inyectar
+    @Qualifier("serviceDecorado")
+    public void setPostService(PostService postService) {
+        this.postService = postService;
+    }
 
     public static void main(String[] args) {
         SpringApplication.run(CursoSpringApplication.class, args);
