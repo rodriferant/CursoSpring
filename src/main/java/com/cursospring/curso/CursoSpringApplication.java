@@ -2,6 +2,8 @@ package com.cursospring.curso;
 
 import com.cursospring.curso.components.PostComponent;
 import com.cursospring.curso.services.PostService;
+import org.apache.juli.logging.Log;
+import org.apache.juli.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.CommandLineRunner;
@@ -40,13 +42,15 @@ public class CursoSpringApplication implements CommandLineRunner {
             System.out.println(p.getDescripcion());
         });
         */
+        Log log = LogFactory.getLog(getClass());
+
         try{
             postService.validation(postComponent.getPosts())
                     .forEach((post)->{
-                        System.out.println(post.getTitulo());
+                        log.info(post.getTitulo());
                     });
         }catch (Exception e){
-            System.out.println(e.getMessage());
+           log.error(e);
         }
 
 

@@ -5,5 +5,5 @@ import com.cursospring.curso.model.Post;
 import java.util.List;
 
 public interface PostService {
-    public List<Post> validation(List<Post> posts);
+    public List<Post> validation(List<Post> posts) throws NullPointerException;
 }
