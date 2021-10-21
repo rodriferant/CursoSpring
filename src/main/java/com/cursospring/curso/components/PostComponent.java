@@ -1,6 +1,8 @@
 package com.cursospring.curso.components;
 
 import com.cursospring.curso.model.Post;
+import org.springframework.beans.factory.config.ConfigurableBeanFactory;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -8,6 +10,7 @@ import java.util.Date;
 import java.util.List;
 
 @Component ("com.cursospring.curso.components.PostComponent")
+@Scope (value = ConfigurableBeanFactory.SCOPE_SINGLETON)
 public class PostComponent {
     public List<Post> getPosts(){
         ArrayList<Post> post = new ArrayList<>();

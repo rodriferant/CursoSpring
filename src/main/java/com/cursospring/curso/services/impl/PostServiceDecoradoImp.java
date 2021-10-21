@@ -5,11 +5,13 @@ import com.cursospring.curso.services.PostService;
 import org.apache.juli.logging.Log;
 import org.apache.juli.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service("serviceDecorado")
+@Scope ("singleton")
 public class PostServiceDecoradoImp implements PostService {
 
     private final Log log = LogFactory.getLog(getClass());
