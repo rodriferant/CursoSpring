@@ -6,6 +6,7 @@ import org.apache.juli.logging.Log;
 import org.apache.juli.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -25,6 +26,13 @@ public class CursoSpringApplication implements CommandLineRunner {
     @Autowired
     private JdbcTemplate jdbcTemplate;
 
+    @Value("${cursospring.jdbc.import.ruta}")
+    private String ruta;
+
+    @Value("${cursospring.jdbc.import}")
+    private String importar;
+
+
     public CursoSpringApplication(){
 
     }
@@ -33,20 +41,32 @@ public class CursoSpringApplication implements CommandLineRunner {
         SpringApplication.run(CursoSpringApplication.class, args);
     }
 
+    Log log = LogFactory.getLog(getClass());
     @Override
     public void run(String... args) throws Exception {
-        //
 
-        Path path = Paths.get("src/main/resources/import.sql");
-        Log log = LogFactory.getLog(getClass());
-        try (BufferedReader bufferedReader = Files.newBufferedReader(path, Charset.forName("UTF-8"))){
-            String line;
-            while ((line = bufferedReader.readLine()) != null){
-                jdbcTemplate.execute(line);
+     if(importar.equalsIgnoreCase("true")){
+
+            Path path = Paths.get(ruta);
+
+            try (BufferedReader bufferedReader = Files.newBufferedReader(path, Charset.forName("UTF-8"))){
+                String line;
+                while ((line = bufferedReader.readLine()) != null){
+                    jdbcTemplate.execute(line);
+                }
+            }catch (IOException ex){
+
             }
-        }catch (IOException ex){
+     }
 
-        }
+        log.info( "Tenemos esta cantidad de permisos: "+ jdbcTemplate.queryForObject("SELECT count(*) FROM permiso;", Integer.class));
+
+
+
+
+
+
+
     }
 
     /*
