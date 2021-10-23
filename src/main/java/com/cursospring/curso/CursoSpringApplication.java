@@ -11,6 +11,13 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.jdbc.core.JdbcTemplate;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.nio.charset.Charset;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+
 @SpringBootApplication
 public class CursoSpringApplication implements CommandLineRunner {
 
@@ -28,7 +35,18 @@ public class CursoSpringApplication implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        jdbcTemplate.execute("insert into permiso (Nombre) value ('Ejemplo')");
+        //
+
+        Path path = Paths.get("src/main/resources/import.sql");
+        Log log = LogFactory.getLog(getClass());
+        try (BufferedReader bufferedReader = Files.newBufferedReader(path, Charset.forName("UTF-8"))){
+            String line;
+            while ((line = bufferedReader.readLine()) != null){
+                jdbcTemplate.execute(line);
+            }
+        }catch (IOException ex){
+
+        }
     }
 
     /*

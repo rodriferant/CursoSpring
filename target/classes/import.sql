@@ -1,0 +1,1 @@
+insert into permiso (Nombre) value ('Administracion');
