@@ -9,10 +9,29 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.jdbc.core.JdbcTemplate;
 
 @SpringBootApplication
 public class CursoSpringApplication implements CommandLineRunner {
 
+
+    @Autowired
+    private JdbcTemplate jdbcTemplate;
+
+    public CursoSpringApplication(){
+
+    }
+
+    public static void main(String[] args) {
+        SpringApplication.run(CursoSpringApplication.class, args);
+    }
+
+    @Override
+    public void run(String... args) throws Exception {
+        jdbcTemplate.execute("insert into permiso (Nombre) value ('Ejemplo')");
+    }
+
+    /*
     @Autowired
     @Qualifier("com.cursospring.curso.components.PostComponent")
     public PostComponent postComponent;
@@ -37,11 +56,14 @@ public class CursoSpringApplication implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
+
+     */
         /*
         postComponent.getPosts().forEach(p->{
             System.out.println(p.getDescripcion());
         });
         */
+    /*
         Log log = LogFactory.getLog(getClass());
 
         try{
@@ -55,7 +77,7 @@ public class CursoSpringApplication implements CommandLineRunner {
 
 
     }
-
+    */
 
 
 }
